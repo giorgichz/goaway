@@ -1,0 +1,32 @@
+# Netlify: Neustart – App, 3D-Globus, Stadtansicht und KI-Funktionen.
+# Im Netlify-Dashboard unter Site configuration → Environment variables setzen:
+#   ANTHROPIC_API_KEY  – Claude-API-Schlüssel
+#   NEUSTART_ZUGANG    – frei gewählter Zugangscode für die App
+[build]
+  command = "npm ci && npm run build"
+  publish = "public"
+  functions = "netlify/functions"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+[functions]
+  node_bundler = "esbuild"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "no-referrer"
+    X-Frame-Options = "DENY"
+    Permissions-Policy = "camera=(), microphone=()"
+
+[[headers]]
+  for = "/sw.js"
+  [headers.values]
+    Cache-Control = "no-cache"
+
+[[headers]]
+  for = "/vendor/cesium/*"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000, immutable"

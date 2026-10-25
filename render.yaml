@@ -1,0 +1,18 @@
+# Render-Blueprint für Neustart (eigener Server): New → Blueprint → Repo wählen.
+# ANTHROPIC_API_KEY und NEUSTART_ZUGANG fragt Render beim Einrichten ab.
+services:
+- type: web
+  name: neustart
+  runtime: node
+  plan: free
+  branch: main
+  buildCommand: npm ci && npm run build
+  startCommand: npm start
+  healthCheckPath: /api/status
+  envVars:
+  - key: ANTHROPIC_API_KEY
+    sync: false
+  - key: NEUSTART_ZUGANG
+    sync: false
+  - key: NODE_ENV
+    value: production

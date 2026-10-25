@@ -1,0 +1,5 @@
+node_modules/
+public/vendor/cesium/
+public/vendor/maplibre/
+.env
+.DS_Store

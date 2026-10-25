@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
+  <meta name="theme-color" content="#030405">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="description" content="Verschlüsselte Neustart-Welt: 3D-Globus, KI-Planer, Routen, Dossiers, Plan, Tresor – auch offline.">
+  <title>Neustart</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon.svg">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="locked">
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="i-welt" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></symbol>
+      <symbol id="i-cockpit" viewBox="0 0 24 24"><path d="M4 17a8 8 0 1 1 16 0"/><path d="m12 17 4-6"/><circle cx="12" cy="17" r="1.4"/></symbol>
+      <symbol id="i-ki" viewBox="0 0 24 24"><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/><path d="M12 8.5 13.6 11 16 12l-2.4 1-1.6 2.5-1.6-2.5L8 12l2.4-1Z"/></symbol>
+      <symbol id="i-plan" viewBox="0 0 24 24"><path d="M9 6h11M9 12h11M9 18h11"/><path d="m3.5 6 1.2 1.2L7 5M3.5 12l1.2 1.2L7 11M3.5 18l1.2 1.2L7 17"/></symbol>
+      <symbol id="i-tresor" viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 4.5 3.4 8.3 8 9 4.6-.7 8-4.5 8-9V6Z"/><rect x="9" y="11" width="6" height="5" rx="1"/><path d="M10 11V9.5a2 2 0 0 1 4 0V11"/></symbol>
+      <symbol id="i-mehr" viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx="1.5"/><rect x="14" y="4" width="6" height="6" rx="1.5"/><rect x="4" y="14" width="6" height="6" rx="1.5"/><rect x="14" y="14" width="6" height="6" rx="1.5"/></symbol>
+      <symbol id="i-geld" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15 8.5a3 3 0 0 0-3-1.5c-1.7 0-3 .9-3 2.3 0 3.2 6 1.8 6 5 0 1.4-1.3 2.4-3 2.4a3.3 3.3 0 0 1-3-1.6M12 5.5v2M12 17v1.5"/></symbol>
+      <symbol id="i-lage" viewBox="0 0 24 24"><path d="M12 3 2 20h20Z"/><path d="M12 10v4.5M12 17.5v.5"/></symbol>
+      <symbol id="i-himmel" viewBox="0 0 24 24"><circle cx="12" cy="12" r="2.5"/><ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(-30 12 12)"/><circle cx="19.5" cy="6.5" r="1"/></symbol>
+      <symbol id="i-flug" viewBox="0 0 24 24"><path d="M10.5 21 12 16l7.5 2.5V16L12 11V5.5a1.5 1.5 0 0 0-3 0V11L1.5 16v2.5L9 16l1.5 5"/></symbol>
+      <symbol id="i-brief" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></symbol>
+      <symbol id="i-notfall" viewBox="0 0 24 24"><path d="M12 21s-8-4.5-8-11a5 5 0 0 1 8-4 5 5 0 0 1 8 4c0 6.5-8 11-8 11Z"/><path d="M12 9v5M9.5 11.5h5"/></symbol>
+      <symbol id="i-schloss" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></symbol>
+      <symbol id="i-zu" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+      <symbol id="i-zurueck" viewBox="0 0 24 24"><path d="m15 5-7 7 7 7"/></symbol>
+    </defs>
+  </svg>
+
+  <div id="sperre" class="sperre" hidden></div>
+
+  <div id="welt" class="welt" aria-label="3D-Globus"></div>
+
+  <header class="hud-top">
+    <div class="hud-brand glass"><img src="icon.svg" alt="" width="22" height="22"><span>NEUSTART</span></div>
+    <div class="hud-status">
+      <span id="ki-pill" class="pill glass ki-pill" hidden><i></i>KI arbeitet</span>
+      <span id="netz" class="pill glass netz">…</span>
+      <button id="sperren" class="pill glass lockbtn" aria-label="Sofort sperren"><svg class="ic"><use href="#i-schloss"/></svg><span>Sperren</span></button>
+    </div>
+  </header>
+
+  <section id="panel" class="panel glass" hidden aria-labelledby="panel-titel">
+    <header class="panel-head">
+      <button class="icon-btn" id="panel-zurueck" aria-label="Zurück" hidden><svg class="ic"><use href="#i-zurueck"/></svg></button>
+      <h1 id="panel-titel"></h1>
+      <a class="icon-btn" href="#welt" aria-label="Schließen"><svg class="ic"><use href="#i-zu"/></svg></a>
+    </header>
+    <div class="panel-body" id="panel-body">
+      <section id="start" class="view" hidden></section>
+      <section id="ki" class="view" hidden></section>
+      <section id="mehr" class="view" hidden></section>
+      <section id="lage" class="view" hidden></section>
+      <section id="himmel" class="view" hidden></section>
+      <section id="fluege" class="view" hidden></section>
+      <section id="geld" class="view" hidden></section>
+      <section id="plan" class="view" hidden></section>
+      <section id="tresor" class="view" hidden></section>
+      <section id="briefe" class="view" hidden></section>
+      <section id="notfall" class="view" hidden></section>
+    </div>
+  </section>
+
+  <nav class="dock glass" id="dock" aria-label="Bereiche">
+    <a href="#welt"><svg class="ic"><use href="#i-welt"/></svg><span>Welt</span></a>
+    <a href="#start"><svg class="ic"><use href="#i-cockpit"/></svg><span>Cockpit</span></a>
+    <a href="#ki"><svg class="ic"><use href="#i-ki"/></svg><span>KI</span></a>
+    <a href="#plan"><svg class="ic"><use href="#i-plan"/></svg><span>Plan</span></a>
+    <a href="#tresor"><svg class="ic"><use href="#i-tresor"/></svg><span>Tresor</span></a>
+    <a href="#mehr"><svg class="ic"><use href="#i-mehr"/></svg><span>Mehr</span></a>
+  </nav>
+
+  <div id="dialog" class="dialog" hidden></div>
+  <div id="toast" class="toast glass" role="status" aria-live="polite" hidden></div>
+
+  <script src="vendor/satellite.min.js"></script>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

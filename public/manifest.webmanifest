@@ -1,0 +1,14 @@
+{
+  "name": "Neustart – Notfall & Auswandern",
+  "short_name": "Neustart",
+  "description": "Offline-Notfall- und Neustart-App",
+  "lang": "de",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#050607",
+  "theme_color": "#050607",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
